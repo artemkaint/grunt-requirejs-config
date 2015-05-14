@@ -1,3 +1,3 @@
-require(['appController'], function (AppController) {
+requireLocal(['appController'], function (AppController) {
   AppController();
 });

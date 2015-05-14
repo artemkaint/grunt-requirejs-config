@@ -41,6 +41,8 @@ module.exports = function(grunt) {
         src: 'test/fixtures/fixture.js',
         dest: 'test/main.js',
         options: {
+          localRequireVar: 'requireLocal',
+          context: 'local-require-context',
           shim: requireShim,
           paths: requirePaths
         }

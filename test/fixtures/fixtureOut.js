@@ -1,5 +1,6 @@
 // Config added by grunt-requirejs-config
-require.config({
+var requireLocal = requirejs.config({
+  "context": "local-require-context",
   "shim": {
     "underscore": {
       "exports": "_"
@@ -25,6 +26,6 @@ require.config({
   }
 }
 );
-require(['appController'], function (AppController) {
+requireLocal(['appController'], function (AppController) {
   AppController();
 });
