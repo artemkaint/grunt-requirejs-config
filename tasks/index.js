@@ -7,18 +7,19 @@ module.exports = function (grunt) {
   grunt.registerMultiTask('requirejsconfig', 'Prepends a require.js config file.', function () {
 
     var options = this.options();
-    var done = this.async();
 
     if (fs.existsSync(this.data.src)) {
-      var configContents = fs.readFileSync(this.data.src, 'utf8');
-      fs.writeFileSync(this.data.dest, '// Config added by grunt-requirejs-config\n');
-      fs.appendFileSync(this.data.dest, 'require.config(' + prettyStringify(options, 2, 'JSON', true) + ');\n');
-      fs.appendFileSync(this.data.dest, configContents);
+      var content = [
+        '(function(requirejs) {',
+        '// Config added by grunt-requirejs-config',
+        'return requirejs.config(' + prettyStringify(options, 2, 'JSON', true) + ');',
+        '})(requirejs);',
+        fs.readFileSync(this.data.src, 'utf8')
+      ];
+      fs.appendFileSync(this.data.dest, content.join('\n'));
       grunt.log.ok('Require.js config created at: ' + this.data.dest);
-      done();
     } else {
       grunt.log.error('No source file found at: ' + this.data.src);
-      done();
     }
   });
 };

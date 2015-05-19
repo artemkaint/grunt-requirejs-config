@@ -1,5 +1,6 @@
+(function(requirejs) {
 // Config added by grunt-requirejs-config
-require.config({
+return requirejs.config({
   "shim": {
     "underscore": {
       "exports": "_"
@@ -25,6 +26,7 @@ require.config({
   }
 }
 );
+})(requirejs);
 require(['appController'], function (AppController) {
   AppController();
 });
